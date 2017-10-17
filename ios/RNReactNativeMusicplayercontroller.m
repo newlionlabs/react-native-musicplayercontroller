@@ -166,8 +166,10 @@ RCT_EXPORT_METHOD(isPlaying: (RCTResponseSenderBlock)callback) {
                               @"artist" : item.artist,
                               @"title" : item.title,
                               @"albumTitle" : item.albumTitle,
-                              @"playbackDuration" : @(item.playbackDuration)
-                              }];
+                              @"playbackDuration" : @(item.playbackDuration),
+                              @"url": item.assetURL.absoluteString,
+                              @"bpm": @(item.beatsPerMinute)
+                            }];
     }
     return metadata;
 }
