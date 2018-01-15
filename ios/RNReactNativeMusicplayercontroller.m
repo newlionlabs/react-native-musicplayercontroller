@@ -39,7 +39,7 @@ RCT_EXPORT_METHOD(presentPicker: (RCTResponseSenderBlock)callback) {
             }
         }
         
-        MPMediaPickerController *picker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
+        MPMediaPickerController *picker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeAnyAudio];
         [picker setShowsCloudItems:false];
         [picker setAllowsPickingMultipleItems:false];
         if ([picker respondsToSelector:@selector(setShowsItemsWithProtectedAssets:)]) {
@@ -163,9 +163,9 @@ RCT_EXPORT_METHOD(isPlaying: (RCTResponseSenderBlock)callback) {
     for (int i = 0; i < mediaItemCollection.items.count; i++) {
         MPMediaItem *item = mediaItemCollection.items[i];
         [metadata addObject:@{
-                              @"artist" : item.artist,
-                              @"title" : item.title,
-                              @"albumTitle" : item.albumTitle,
+                              @"artist" : item.artist ? item.artist : @"Unknown Artist",
+                              @"title" : item.title ? item.title : @"Unknown Title",
+                              @"albumTitle" : item.albumTitle ? item.albumTitle : @"Unknown Album Title",
                               @"playbackDuration" : @(item.playbackDuration),
                               @"url": item.assetURL.absoluteString,
                               @"bpm": @(item.beatsPerMinute)
